@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import Table from "./components/Table";
 
 export class App extends Component {
   state = {
@@ -7,7 +8,7 @@ export class App extends Component {
   };
 
   componentDidMount() {
-
+    this.fetchSmallData();
   }
 
   fetchSmallData = () => {
@@ -26,7 +27,9 @@ export class App extends Component {
 
   render() {
   
-    return <div className="app"></div>;
+    return <div className="app">
+      <Table data={this.state.data}/>
+    </div>;
   }
 }
 
