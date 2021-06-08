@@ -1,4 +1,13 @@
-.table-wrapper {
+.app {
+  padding: 20px 0;
   width: 60%;
   margin: 0 auto;
+}
+
+.action-mode-selector {
+  display: flex;
+  justify-content: space-around;
+  width: 40%;
+  margin: 0 auto;
+  margin-bottom: 20px;
 }

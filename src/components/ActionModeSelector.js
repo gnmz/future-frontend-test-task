@@ -1,13 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 export class ActionModeSelector extends Component {
-    render() {
-        return (
-            <div>
-                
-            </div>
-        )
-    }
+  render() {
+    const { fetchSmallData, fetchBigData } = this.props;
+    return (
+      <div className="action-mode-selector">
+        <button className="btn btn-primary" onClick={fetchSmallData}>Small data</button>
+        <button className="btn btn-primary" onClick={fetchBigData}>Big data</button>
+      </div>
+    );
+  }
 }
 
-export default ActionModeSelector
+export default ActionModeSelector;

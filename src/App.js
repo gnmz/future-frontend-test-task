@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactPaginate from "react-paginate";
 import "./App.css";
+import ActionModeSelector from "./components/ActionModeSelector";
 import Table from "./components/Table";
 
 export class App extends Component {
@@ -32,6 +33,7 @@ export class App extends Component {
     const { data, pageSize } = this.state;
     return (
       <div className="app">
+        <ActionModeSelector fetchSmallData={this.fetchSmallData} fetchBigData={this.fetchBigData} />
         <Table data={data} />
         <ReactPaginate
           previousLabel={"Prev"}
