@@ -16,7 +16,7 @@ export class Table extends Component {
         </thead>
         <tbody>
           {data.map((item) => (
-            <tr key={item.id}>
+            <tr key={item.id + item.phone}>
               <td>{item.id}</td>
               <td>{item.firstName}</td>
               <td>{item.lastName}</td>
