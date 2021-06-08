@@ -56,7 +56,7 @@ export class App extends Component {
         ) : (
           <>
             <Table data={data} />
-
+            {data.length < 50 ? null :
             <ReactPaginate
               previousLabel={"Prev"}
               nextLabel={"Next"}
@@ -75,6 +75,7 @@ export class App extends Component {
               previousLinkClassName="page-link"
               nextLinkClassName="page-link"
             />
+          }
           </>
         )}
       </div>
