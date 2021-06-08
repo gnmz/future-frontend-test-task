@@ -1,14 +1,17 @@
 import React, { Component } from "react";
+import ReactPaginate from "react-paginate";
 import "./App.css";
 import Table from "./components/Table";
 
 export class App extends Component {
   state = {
     data: [],
+    pageSize: 50,
+    currentPage: 0
   };
 
   componentDidMount() {
-    this.fetchSmallData();
+    
   }
 
   fetchSmallData = () => {
@@ -26,10 +29,28 @@ export class App extends Component {
   };
 
   render() {
-    const { data } = this.state;
+    const { data, pageSize } = this.state;
     return (
       <div className="app">
         <Table data={data} />
+        <ReactPaginate
+          previousLabel={"Prev"}
+          nextLabel={"Next"}
+          breakLabel={"..."}
+          breakClassName={"break-me"}
+          pageCount={data.length / pageSize}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={this.handlePageClick}
+          containerClassName={"pagination"}
+          activeClassName={"active"}
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          nextClassName="page-item"
+          previousLinkClassName="page-link"
+          nextLinkClassName="page-link"
+        />
       </div>
     );
   }

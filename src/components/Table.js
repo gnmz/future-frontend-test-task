@@ -4,6 +4,7 @@ export class Table extends Component {
   render() {
     const { data } = this.props;
     return (
+      <div className='table-wrapper'>
       <table className="table">
         <thead>
           <tr>
@@ -26,6 +27,7 @@ export class Table extends Component {
           ))}
         </tbody>
       </table>
+      </div>
     );
   }
 }
