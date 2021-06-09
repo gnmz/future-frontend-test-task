@@ -15,7 +15,7 @@ export class App extends Component {
     pageSize: 50,
     currentPage: 0,
     selectedRow: null,
-    searchValue: ''
+    searchbleData: []
   };
 
   componentDidMount() {}
@@ -46,15 +46,28 @@ export class App extends Component {
   };
 
   selectingRow = (item) => {
-    this.setState({selectedRow: item})
-  }
+    this.setState({ selectedRow: item });
+  };
 
   onSearch = (item) => {
-    console.log(item)
-  }
+    const { data } = this.state;
+    if (item === '') {
+      this.setState({searchbleData: []})
+    } else {
+      const searchbleData =  data.filter((user) => {
+        return (
+          user["firstName"].toLowerCase().includes(item.toLowerCase()) ||
+          user["lastName"].toLowerCase().includes(item.toLowerCase()) ||
+          user["email"].toLowerCase().includes(item.toLowerCase()) ||
+          user["phone"].toLowerCase().includes(item.toLowerCase())
+        );
+      });
+      this.setState({searchbleData: searchbleData})
+    }
+  };
 
   render() {
-    const { data, pageSize, isLoading, selectedRow } = this.state;
+    const { data, pageSize, isLoading, selectedRow, searchbleData } = this.state;
     return (
       <div className="app">
         <ActionModeSelector
@@ -67,8 +80,8 @@ export class App extends Component {
           ) : null
         ) : (
           <>
-          <TableSearch onSearch={this.onSearch} /> 
-            <Table data={data} selectingRow={this.selectingRow}/>
+            <TableSearch onSearch={this.onSearch} />
+            <Table data={searchbleData.length <= 0 ? data: searchbleData} selectingRow={this.selectingRow} />
             {data.length < pageSize ? null : (
               <ReactPaginate
                 previousLabel={"Prev"}
@@ -89,7 +102,7 @@ export class App extends Component {
                 nextLinkClassName="page-link"
               />
             )}
-            {selectedRow ? <ViewRowCard selectedRow={selectedRow} />: null}
+            {selectedRow ? <ViewRowCard selectedRow={selectedRow} /> : null}
           </>
         )}
       </div>

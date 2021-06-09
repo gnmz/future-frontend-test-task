@@ -16,7 +16,7 @@ export class TableSearch extends Component {
   onKeyDownHandler = (e) => {
     const onSearch = this.props.onSearch;
     const value = this.state.value;
-    if (value && e.key === "Enter") {
+    if (e.key === "Enter") {
       onSearch(value);
     }
   };
