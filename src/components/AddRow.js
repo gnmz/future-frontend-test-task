@@ -54,7 +54,14 @@ export class AddRow extends Component {
 
   emailHandler = (e) => {
     const value = e.target.value;
-    this.setState({ email: value });
+    const regexp = new RegExp(/\S+@\S+\.\S+/);
+    let match = value.match(regexp);
+    if (match) {
+      this.setState({ email: value, tipEmail: false });
+    }
+    if (!match) {
+      this.setState({ email: value, tipEmail: true });
+    }
   };
 
   phoneHandler = (e) => {
