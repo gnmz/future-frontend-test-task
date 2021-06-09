@@ -22,7 +22,7 @@ export class ViewRowCard extends Component {
     const { streetAddress, city, state, zip } = this.props.selectedRow.address;
 
     return (
-      <div className="card" >
+      <div className="card p-3" >
         <p>
           Выбран пользователь{" "}
           <b>
