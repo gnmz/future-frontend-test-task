@@ -4,6 +4,7 @@ import "./App.css";
 import ActionModeSelector from "./components/ActionModeSelector";
 import Loader from "./components/Loader";
 import Table from "./components/Table";
+import ViewRowCard from "./components/ViewRowCard";
 
 export class App extends Component {
   state = {
@@ -12,6 +13,7 @@ export class App extends Component {
     isLoading: true,
     pageSize: 50,
     currentPage: 0,
+    selectedRow: null
   };
 
   componentDidMount() {}
@@ -41,8 +43,12 @@ export class App extends Component {
     }
   };
 
+  selectingRow = (item) => {
+    this.setState({selectedRow: item})
+  }
+
   render() {
-    const { data, pageSize, isLoading } = this.state;
+    const { data, pageSize, isLoading, selectedRow } = this.state;
     return (
       <div className="app">
         <ActionModeSelector
@@ -55,27 +61,28 @@ export class App extends Component {
           ) : null
         ) : (
           <>
-            <Table data={data} />
-            {data.length < 50 ? null :
-            <ReactPaginate
-              previousLabel={"Prev"}
-              nextLabel={"Next"}
-              breakLabel={"..."}
-              breakClassName={"break-me"}
-              pageCount={data.length / pageSize}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={5}
-              onPageChange={this.handlePageClick}
-              containerClassName={"pagination"}
-              activeClassName={"active"}
-              pageClassName="page-item"
-              pageLinkClassName="page-link"
-              previousClassName="page-item"
-              nextClassName="page-item"
-              previousLinkClassName="page-link"
-              nextLinkClassName="page-link"
-            />
-          }
+            <Table data={data} selectingRow={this.selectingRow}/>
+            {data.length < pageSize ? null : (
+              <ReactPaginate
+                previousLabel={"Prev"}
+                nextLabel={"Next"}
+                breakLabel={"..."}
+                breakClassName={"break-me"}
+                pageCount={data.length / pageSize}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={this.handlePageClick}
+                containerClassName={"pagination"}
+                activeClassName={"active"}
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                nextClassName="page-item"
+                previousLinkClassName="page-link"
+                nextLinkClassName="page-link"
+              />
+            )}
+            {selectedRow ? <ViewRowCard selectedRow={selectedRow} />: null}
           </>
         )}
       </div>

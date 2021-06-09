@@ -2,10 +2,10 @@ import React, { Component } from "react";
 
 export class Table extends Component {
   render() {
-    const { data } = this.props;
+    const { data, selectingRow } = this.props;
     return (
       <div className='table-wrapper'>
-      <table className="table">
+      <table className="table" style={{cursor:'pointer'}}>
         <thead>
           <tr>
             <th>ID</th>
@@ -17,7 +17,7 @@ export class Table extends Component {
         </thead>
         <tbody>
           {data.map((item) => (
-            <tr key={item.id + item.phone}>
+            <tr key={item.id + item.phone} onClick={()=>{selectingRow(item)}}>
               <td>{item.id}</td>
               <td>{item.firstName}</td>
               <td>{item.lastName}</td>
