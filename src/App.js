@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactPaginate from "react-paginate";
 import "./App.css";
 import ActionModeSelector from "./components/ActionModeSelector";
+import AddRow from "./components/AddRow";
 import Loader from "./components/Loader";
 import Table from "./components/Table";
 import TableSearch from "./components/TableSearch";
@@ -81,6 +82,7 @@ export class App extends Component {
         ) : (
           <>
             <TableSearch onSearch={this.onSearch} />
+            <AddRow />
             <Table data={searchbleData.length <= 0 ? data: searchbleData} selectingRow={this.selectingRow} />
             {data.length < pageSize ? null : (
               <ReactPaginate
