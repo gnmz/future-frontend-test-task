@@ -4,9 +4,10 @@ export class Tip extends Component {
     render() {
         const { tipTitle } = this.props;
         return (
-            <p>
-                Неверный формат. {tipTitle}
-            </p>
+            <div className="tip">
+                <p>Неверный формат.</p>
+                <p>{tipTitle}</p>
+            </div>
         )
     }
 }
