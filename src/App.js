@@ -16,7 +16,7 @@ export class App extends Component {
     pageSize: 50,
     currentPage: 0,
     selectedRow: null,
-    searchbleData: []
+    searchbleData: [],
   };
 
   componentDidMount() {}
@@ -52,10 +52,10 @@ export class App extends Component {
 
   onSearch = (item) => {
     const { data } = this.state;
-    if (item === '') {
-      this.setState({searchbleData: []})
+    if (item === "") {
+      this.setState({ searchbleData: [] });
     } else {
-      const searchbleData =  data.filter((user) => {
+      const searchbleData = data.filter((user) => {
         return (
           user["firstName"].toLowerCase().includes(item.toLowerCase()) ||
           user["lastName"].toLowerCase().includes(item.toLowerCase()) ||
@@ -63,12 +63,14 @@ export class App extends Component {
           user["phone"].toLowerCase().includes(item.toLowerCase())
         );
       });
-      this.setState({searchbleData: searchbleData})
+      this.setState({ searchbleData: searchbleData });
     }
   };
 
   render() {
-    const { data, pageSize, isLoading, selectedRow, searchbleData } = this.state;
+    const { data, pageSize, isLoading, selectedRow, searchbleData } =
+      this.state;
+
     return (
       <div className="app">
         <ActionModeSelector
@@ -83,7 +85,10 @@ export class App extends Component {
           <>
             <TableSearch onSearch={this.onSearch} />
             <AddRow />
-            <Table data={searchbleData.length <= 0 ? data: searchbleData} selectingRow={this.selectingRow} />
+            <Table
+              data={searchbleData.length <= 0 ? data : searchbleData}
+              selectingRow={this.selectingRow}
+            />
             {data.length < pageSize ? null : (
               <ReactPaginate
                 previousLabel={"Prev"}
