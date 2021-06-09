@@ -4,6 +4,7 @@ import "./App.css";
 import ActionModeSelector from "./components/ActionModeSelector";
 import Loader from "./components/Loader";
 import Table from "./components/Table";
+import TableSearch from "./components/TableSearch";
 import ViewRowCard from "./components/ViewRowCard";
 
 export class App extends Component {
@@ -13,7 +14,8 @@ export class App extends Component {
     isLoading: true,
     pageSize: 50,
     currentPage: 0,
-    selectedRow: null
+    selectedRow: null,
+    searchValue: ''
   };
 
   componentDidMount() {}
@@ -47,6 +49,10 @@ export class App extends Component {
     this.setState({selectedRow: item})
   }
 
+  onSearch = (item) => {
+    console.log(item)
+  }
+
   render() {
     const { data, pageSize, isLoading, selectedRow } = this.state;
     return (
@@ -61,6 +67,7 @@ export class App extends Component {
           ) : null
         ) : (
           <>
+          <TableSearch onSearch={this.onSearch} /> 
             <Table data={data} selectingRow={this.selectingRow}/>
             {data.length < pageSize ? null : (
               <ReactPaginate
