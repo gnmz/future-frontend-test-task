@@ -67,6 +67,10 @@ export class App extends Component {
     }
   };
 
+  addNewRow = (item) => {
+    console.log(item)
+  }
+
   render() {
     const { data, pageSize, isLoading, selectedRow, searchbleData } =
       this.state;
@@ -84,7 +88,7 @@ export class App extends Component {
         ) : (
           <>
             <TableSearch onSearch={this.onSearch} />
-            <AddRow />
+            <AddRow addNewRow={this.addNewRow} />
             <Table
               data={searchbleData.length <= 0 ? data : searchbleData}
               selectingRow={this.selectingRow}

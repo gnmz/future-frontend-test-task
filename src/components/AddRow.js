@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import FormInput from "./FormInput";
+import PhoneInputForm from "./PhoneInputForm";
 
 export class AddRow extends Component {
   state = {
@@ -82,7 +83,8 @@ export class AddRow extends Component {
       email: email,
       phone: phone,
     };
-    console.log(newRow);
+    const addNewRow = this.props.addNewRow;
+    addNewRow(newRow);
   };
 
   render() {
@@ -97,13 +99,13 @@ export class AddRow extends Component {
       tipFirstname,
       tipLastname,
       tipEmail,
-      tipPhone,
     } = this.state;
     return (
       <div
         style={{
           display: "flex",
           justifyContent: isOpen ? "space-between" : "flex-end",
+          height: '80px'
         }}
       >
         {!isOpen ? null : (
@@ -140,13 +142,13 @@ export class AddRow extends Component {
               tipTitle="index@site.com"
               isTipped={tipEmail}
             />
-            <FormInput
-              inputType="tel"
+            <PhoneInputForm
+              mask="(000)000-0000"
               placeholder="Phone"
+              size={13}
               value={phone}
               onChange={this.phoneHandler}
-              tipTitle="(000)000-0000"
-              isTipped={tipPhone}
+              tipTitle="Телефон введен не полностью"
             />
           </div>
         )}

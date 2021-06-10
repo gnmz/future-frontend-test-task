@@ -12,7 +12,7 @@ export class FormInput extends Component {
       isTipped,
     } = this.props;
     return (
-      <div>
+      <div className="form-input">
         <input
           type={inputType}
           placeholder={placeholder}
