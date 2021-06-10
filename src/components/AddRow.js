@@ -24,7 +24,7 @@ export class AddRow extends Component {
     }
 
     if (+value) {
-      this.setState({ id: value, tipId: false });
+      this.setState({ id: +value, tipId: false });
     }
   };
 

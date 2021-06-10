@@ -68,8 +68,10 @@ export class App extends Component {
   };
 
   addNewRow = (item) => {
-    console.log(item)
-  }
+    const data = this.state.data;
+    data.unshift(item);
+    this.setState({data: data})
+  };
 
   render() {
     const { data, pageSize, isLoading, selectedRow, searchbleData } =
