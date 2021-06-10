@@ -3,8 +3,14 @@ import Tip from "./Tip";
 
 export class FormInput extends Component {
   render() {
-    const { inputType, placeholder, value, onChange, tipTitle, isTipped } =
-      this.props;
+    const {
+      inputType,
+      placeholder,
+      value,
+      onChange,
+      tipTitle,
+      isTipped,
+    } = this.props;
     return (
       <div>
         <input

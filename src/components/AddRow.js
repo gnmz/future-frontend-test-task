@@ -141,7 +141,7 @@ export class AddRow extends Component {
               isTipped={tipEmail}
             />
             <FormInput
-              inputType="phone"
+              inputType="tel"
               placeholder="Phone"
               value={phone}
               onChange={this.phoneHandler}
