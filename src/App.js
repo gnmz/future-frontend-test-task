@@ -91,6 +91,11 @@ export class App extends Component {
       currentPage,
     } = this.state;
 
+    let tableData =
+      searchbleData.length <= 0
+        ? data.slice(pageSize * currentPage, pageSize * currentPage + pageSize)
+        : searchbleData;
+
     return (
       <div className="app">
         <ActionModeSelector
@@ -105,17 +110,7 @@ export class App extends Component {
           <>
             <TableSearch onSearch={this.onSearch} />
             <AddRow addNewRow={this.addNewRow} />
-            <Table
-              data={
-                searchbleData.length <= 0
-                  ? data.slice(
-                      pageSize * currentPage,
-                      pageSize * currentPage + pageSize
-                    )
-                  : searchbleData
-              }
-              selectingRow={this.selectingRow}
-            />
+            <Table data={tableData} selectingRow={this.selectingRow} />
             {data.length < pageSize ? null : (
               <ReactPaginate
                 previousLabel={"Prev"}

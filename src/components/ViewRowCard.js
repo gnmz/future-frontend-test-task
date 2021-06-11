@@ -4,17 +4,13 @@ export class ViewRowCard extends Component {
   state = {
     text: this.props.selectedRow.description,
   };
-  shouldComponentUpdate(nextProps) {
-    if (!nextProps.selectedRow.description) {
-      this.setState({
-        text: "",
-      });
+
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.selectedRow.description !== prevProps.selectedRow.description
+    ) {
+      this.setState({ text: this.props.selectedRow.description });
     }
-    if (nextProps.selectedRow.description !== this.state.text) {
-      this.setState({ text: nextProps.selectedRow.description });
-      return true;
-    }
-    return false;
   }
 
   updateText = () => {
@@ -25,7 +21,17 @@ export class ViewRowCard extends Component {
     const { firstName, lastName } = this.props.selectedRow;
 
     if (this.props.selectedRow.address === undefined) {
-      return(<div>Some text</div>)
+      return (
+        <div className="card p-3">
+          <p>
+            Выбран пользователь{" "}
+            <b>
+              {firstName} {lastName}
+            </b>
+          </p>
+          <p>Подробного описания у пользователя нет</p>
+        </div>
+      );
     } else {
       const { streetAddress, city, state, zip } =
         this.props.selectedRow.address;
