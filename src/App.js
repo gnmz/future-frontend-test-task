@@ -70,12 +70,26 @@ export class App extends Component {
   addNewRow = (item) => {
     const data = this.state.data;
     data.unshift(item);
-    this.setState({data: data})
+    this.setState({ data: data });
+  };
+
+  handlePageClick = (item) => {
+    this.setState({ currentPage: item });
+  };
+
+  pageChangeHandler = ({ selected }) => {
+    this.setState({ currentPage: selected });
   };
 
   render() {
-    const { data, pageSize, isLoading, selectedRow, searchbleData } =
-      this.state;
+    const {
+      data,
+      pageSize,
+      isLoading,
+      selectedRow,
+      searchbleData,
+      currentPage,
+    } = this.state;
 
     return (
       <div className="app">
@@ -92,7 +106,14 @@ export class App extends Component {
             <TableSearch onSearch={this.onSearch} />
             <AddRow addNewRow={this.addNewRow} />
             <Table
-              data={searchbleData.length <= 0 ? data : searchbleData}
+              data={
+                searchbleData.length <= 0
+                  ? data.slice(
+                      pageSize * currentPage,
+                      pageSize * currentPage + pageSize
+                    )
+                  : searchbleData
+              }
               selectingRow={this.selectingRow}
             />
             {data.length < pageSize ? null : (
@@ -104,7 +125,8 @@ export class App extends Component {
                 pageCount={data.length / pageSize}
                 marginPagesDisplayed={2}
                 pageRangeDisplayed={5}
-                onPageChange={this.handlePageClick}
+                onPageChange={this.pageChangeHandler}
+                forcePage={currentPage}
                 containerClassName={"pagination"}
                 activeClassName={"active"}
                 pageClassName="page-item"
@@ -115,6 +137,7 @@ export class App extends Component {
                 nextLinkClassName="page-link"
               />
             )}
+
             {selectedRow ? <ViewRowCard selectedRow={selectedRow} /> : null}
           </>
         )}
