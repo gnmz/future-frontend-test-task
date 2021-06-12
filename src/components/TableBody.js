@@ -7,7 +7,7 @@ export class TableBody extends Component {
             <tbody>
             {data.map((item) => (
               <tr
-                key={item.id + item.phone}
+                key={item.id + Math.random()}
                 onClick={() => {
                   selectingRow(item);
                 }}
