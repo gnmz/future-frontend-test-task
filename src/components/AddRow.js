@@ -156,6 +156,18 @@ export class AddRow extends Component {
     };
     const addNewRow = this.props.addNewRow;
     addNewRow(newRow);
+    this.resetInputs();
+    
+  };
+
+  resetInputs = () => {
+    this.setState({
+      id: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+    });
   };
 
   render() {
@@ -252,7 +264,13 @@ export class AddRow extends Component {
           <button
             className="btn btn-primary"
             onClick={this.addNewRow}
-            disabled={idError || firstNameError || lastNameError || emailError || phoneError}
+            disabled={
+              idError ||
+              firstNameError ||
+              lastNameError ||
+              emailError ||
+              phoneError
+            }
           >
             Записать
           </button>
