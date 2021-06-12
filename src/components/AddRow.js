@@ -21,7 +21,11 @@ export class AddRow extends Component {
     lastNameError: "Поле не может быть пустым",
     emailError: "Поле не может быть пустым",
     phoneError: "Поле не может быть пустым",
-    formValid: false,
+    idValid: false,
+    firstNameValid: false,
+    lastNameValid: false,
+    emailValid: false,
+    phoneValid: false,
   };
 
   idHandler = (e) => {
@@ -29,13 +33,21 @@ export class AddRow extends Component {
 
     this.setState({ id: value });
     if (!value) {
-      this.setState({ id: value, idError: "Поле не может быть пустым" });
+      this.setState({
+        id: value,
+        idError: "Поле не может быть пустым",
+        idValid: false,
+      });
     } else {
       if (typeof value !== "number") {
-        this.setState({ id: value, idError: "Некорректный формат" });
+        this.setState({
+          id: value,
+          idError: "Некорректный формат",
+          idValid: false,
+        });
       }
       if (+value) {
-        this.setState({ id: +value, idError: "" });
+        this.setState({ id: +value, idError: "", idValid: true });
       }
     }
   };
@@ -48,15 +60,23 @@ export class AddRow extends Component {
 
     this.setState({ firstName: value });
     if (!value) {
-      this.setState({ firstNameError: "Поле не может быть пустым" });
+      this.setState({
+        firstNameError: "Поле не может быть пустым",
+        firstNameValid: false,
+      });
     } else {
       if (match) {
-        this.setState({ firstName: value, firstNameError: "" });
+        this.setState({
+          firstName: value,
+          firstNameError: "",
+          firstNameValid: true,
+        });
       }
       if (!match) {
         this.setState({
           firstName: value,
           firstNameError: "Некорректный формат",
+          firstNameValid: false,
         });
       }
     }
@@ -70,16 +90,24 @@ export class AddRow extends Component {
 
     this.setState({ lastName: value });
     if (!value) {
-      this.setState({ lastNameError: "Поле не может быть пустым" });
+      this.setState({
+        lastNameError: "Поле не может быть пустым",
+        lastNameValid: false,
+      });
     } else {
       if (match) {
-        this.setState({ lastName: value, lastNameError: "" });
+        this.setState({
+          lastName: value,
+          lastNameError: "",
+          lastNameValid: true,
+        });
       }
 
       if (!match) {
         this.setState({
           lastName: value,
           lastNameError: "Некорректный формат",
+          lastNameValid: false,
         });
       }
     }
@@ -94,13 +122,20 @@ export class AddRow extends Component {
     this.setState({ email: value });
 
     if (!value) {
-      this.setState({ emailError: "Поле не может быть пустым" });
+      this.setState({
+        emailError: "Поле не может быть пустым",
+        emailValid: false,
+      });
     } else {
       if (match) {
-        this.setState({ email: value, emailError: "" });
+        this.setState({ email: value, emailError: "", emailValid: true });
       }
       if (!match) {
-        this.setState({ email: value, emailError: "Некорректный формат" });
+        this.setState({
+          email: value,
+          emailError: "Некорректный формат",
+          emailValid: false,
+        });
       }
     }
   };
@@ -110,12 +145,20 @@ export class AddRow extends Component {
     this.setState({ phone: value });
 
     if (!value) {
-      this.setState({ phone: value, phoneError: "Поле не может быть пустым" });
+      this.setState({
+        phone: value,
+        phoneError: "Поле не может быть пустым",
+        phoneValid: false,
+      });
     } else {
       if (value.length !== 13) {
-        this.setState({ phone: value, phoneError: "Введено не полностью" });
+        this.setState({
+          phone: value,
+          phoneError: "Введено не полностью",
+          phoneValid: false,
+        });
       } else {
-        this.setState({ phone: value, phoneError: "" });
+        this.setState({ phone: value, phoneError: "", phoneValid: true });
       }
     }
   };
@@ -156,8 +199,11 @@ export class AddRow extends Component {
       phone: phone,
     };
     const addNewRow = this.props.addNewRow;
+
     addNewRow(newRow);
+
     this.resetInputs();
+    this.resetInputsValid();
   };
 
   resetInputs = () => {
@@ -167,6 +213,16 @@ export class AddRow extends Component {
       lastName: "",
       email: "",
       phone: "",
+    });
+  };
+
+  resetInputsValid = () => {
+    this.setState({
+      idValid: false,
+      firstNameValid: false,
+      lastNameValid: false,
+      emailValid: false,
+      phoneValid: false,
     });
   };
 
@@ -189,13 +245,16 @@ export class AddRow extends Component {
       emailError,
       phoneError,
     } = this.state;
+    const { idValid, firstNameValid, lastNameValid, emailValid, phoneValid } =
+      this.state;
+
     return (
       <div
         style={{
           display: "flex",
           justifyContent: isOpen ? "space-between" : "flex-end",
-          margin: '5px 0',
-          height: "80px", 
+          margin: "5px 0",
+          height: "80px",
         }}
       >
         {!isOpen ? null : (
@@ -260,19 +319,30 @@ export class AddRow extends Component {
             isFormOpen={isOpen}
           />
         ) : (
-          <div style={{display: "flex", flexDirection: 'column', justifyContent: 'space-around'}}>
-          <AddRowButton
-            onClick={this.addNewRow}
-            title="Добавить"
-            disabled={
-              idError ||
-              firstNameError ||
-              lastNameError ||
-              emailError ||
-              phoneError
-            }
-          />
-          <AddRowButton title="Закрыть форму" onClick={()=>{this.setState({isOpen: false})}}/>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-around",
+            }}
+          >
+            <AddRowButton
+              onClick={this.addNewRow}
+              title="Добавить"
+              disabled={
+                !idValid ||
+                !firstNameValid ||
+                !lastNameValid ||
+                !emailValid ||
+                !phoneValid
+              }
+            />
+            <AddRowButton
+              title="Закрыть форму"
+              onClick={() => {
+                this.setState({ isOpen: false });
+              }}
+            />
           </div>
         )}
       </div>

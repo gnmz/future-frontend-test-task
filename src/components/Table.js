@@ -7,6 +7,7 @@ export class Table extends Component {
     sort: "asc",
     sortField: "id",
     data: this.props.sortData,
+    
   };
 
   componentDidMount() {
