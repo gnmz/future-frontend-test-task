@@ -20,6 +20,7 @@ export class AddRow extends Component {
     lastNameError: "Поле не может быть пустым",
     emailError: "Поле не может быть пустым",
     phoneError: "Поле не может быть пустым",
+    formValid: false,
   };
 
   idHandler = (e) => {
@@ -251,11 +252,7 @@ export class AddRow extends Component {
           <button
             className="btn btn-primary"
             onClick={this.addNewRow}
-            disabled={
-              this.state.tipId ||
-              this.state.tipFirstname ||
-              this.state.tipLastname
-            }
+            disabled={idError || firstNameError || lastNameError || emailError || phoneError}
           >
             Записать
           </button>
