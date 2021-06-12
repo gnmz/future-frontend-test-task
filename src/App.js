@@ -81,6 +81,10 @@ export class App extends Component {
     this.setState({ currentPage: selected });
   };
 
+  sortHandler = (data) => {
+    this.setState({data: data})
+  }
+
   render() {
     const {
       data,
@@ -110,7 +114,7 @@ export class App extends Component {
           <>
             <TableSearch onSearch={this.onSearch} />
             <AddRow addNewRow={this.addNewRow} />
-            <Table data={tableData} selectingRow={this.selectingRow} />
+            <Table data={tableData} selectingRow={this.selectingRow} sortData={data} sortHandler={this.sortHandler} />
             {data.length < pageSize ? null : (
               <ReactPaginate
                 previousLabel={"Prev"}
