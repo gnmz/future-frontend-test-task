@@ -8,8 +8,10 @@ export class FormInput extends Component {
       placeholder,
       value,
       onChange,
-      tipTitle,
-      isTipped,
+      errorTitle,
+      isDirty,
+      name,
+      onBlurHandler,
     } = this.props;
     return (
       <div className="form-input">
@@ -17,14 +19,16 @@ export class FormInput extends Component {
           type={inputType}
           placeholder={placeholder}
           className={
-            isTipped && value.length !== 0
+            isDirty && errorTitle
               ? "form-control border-danger"
               : "form-control"
           }
+          name={name}
           value={value}
           onChange={onChange}
+          onBlur={onBlurHandler}
         />
-        {isTipped && value.length !== 0 ? <Tip tipTitle={tipTitle} /> : null}
+        {(errorTitle && isDirty) && <Tip tipTitle={errorTitle} /> }
       </div>
     );
   }

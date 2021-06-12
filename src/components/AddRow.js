@@ -10,64 +10,134 @@ export class AddRow extends Component {
     lastName: "",
     email: "",
     phone: "",
-    tipId: false,
-    tipFirstname: false,
-    tipLastname: false,
-    tipEmail: false,
-    tipPhone: false,
+    idDirty: false,
+    firstNameDirty: false,
+    lastNameDirty: false,
+    emailDirty: false,
+    phoneDirty: false,
+    idError: "Поле не может быть пустым",
+    firstNameError: "Поле не может быть пустым",
+    lastNameError: "Поле не может быть пустым",
+    emailError: "Поле не может быть пустым",
+    phoneError: "Поле не может быть пустым",
   };
 
   idHandler = (e) => {
     const value = e.target.value;
-    if (typeof value !== "number") {
-      this.setState({ id: value, tipId: true });
-    }
 
-    if (+value) {
-      this.setState({ id: +value, tipId: false });
+    this.setState({ id: value });
+    if (!value) {
+      this.setState({ id: value, idError: "Поле не может быть пустым" });
+    } else {
+      if (typeof value !== "number") {
+        this.setState({ id: value, idError: "Некорректный формат" });
+      }
+      if (+value) {
+        this.setState({ id: +value, idError: "" });
+      }
     }
   };
 
   firstNameHandler = (e) => {
     const value = e.target.value;
+
     const regexp = new RegExp(/^[a-zA-Zа-яА-Я ,.'-]+$/i);
-    let match = value.match(regexp);
-    if (match) {
-      this.setState({ firstName: value, tipFirstname: false });
-    }
-    if (!match) {
-      this.setState({ firstName: value, tipFirstname: true });
+    const match = value.match(regexp);
+
+    this.setState({ firstName: value });
+    if (!value) {
+      this.setState({ firstNameError: "Поле не может быть пустым" });
+    } else {
+      if (match) {
+        this.setState({ firstName: value, firstNameError: "" });
+      }
+      if (!match) {
+        this.setState({
+          firstName: value,
+          firstNameError: "Некорректный формат",
+        });
+      }
     }
   };
 
   lastNameHandler = (e) => {
     const value = e.target.value;
-    const regexp = new RegExp(/^[a-zA-Zа-яА-Я ,.'-]+$/i);
-    let match = value.match(regexp);
-    if (match) {
-      this.setState({ lastName: value, tipLastname: false });
-    }
 
-    if (!match) {
-      this.setState({ lastName: value, tipLastname: true });
+    const regexp = new RegExp(/^[a-zA-Zа-яА-Я ,.'-]+$/i);
+    const match = value.match(regexp);
+
+    this.setState({ lastName: value });
+    if (!value) {
+      this.setState({ lastNameError: "Поле не может быть пустым" });
+    } else {
+      if (match) {
+        this.setState({ lastName: value, lastNameError: "" });
+      }
+
+      if (!match) {
+        this.setState({
+          lastName: value,
+          lastNameError: "Некорректный формат",
+        });
+      }
     }
   };
 
   emailHandler = (e) => {
     const value = e.target.value;
+
     const regexp = new RegExp(/\S+@\S+\.\S+/);
-    let match = value.match(regexp);
-    if (match) {
-      this.setState({ email: value, tipEmail: false });
-    }
-    if (!match) {
-      this.setState({ email: value, tipEmail: true });
+    const match = value.match(regexp);
+
+    this.setState({ email: value });
+
+    if (!value) {
+      this.setState({ emailError: "Поле не может быть пустым" });
+    } else {
+      if (match) {
+        this.setState({ email: value, emailError: "" });
+      }
+      if (!match) {
+        this.setState({ email: value, emailError: "Некорректный формат" });
+      }
     }
   };
 
   phoneHandler = (e) => {
     const value = e.target.value;
     this.setState({ phone: value });
+
+    if (!value) {
+      this.setState({ phone: value, phoneError: "Поле не может быть пустым" });
+    } else {
+      if (value.length !== 13) {
+        this.setState({ phone: value, phoneError: "Введено не полностью" });
+      } else {
+        this.setState({ phone: value, phoneError: "" });
+      }
+    }
+  };
+
+  onBlurHandler = (e) => {
+    switch (e.target.name) {
+      case "id":
+        this.setState({ idDirty: true });
+        break;
+      case "firstName":
+        this.setState({ firstNameDirty: true });
+        break;
+      case "lastName":
+        this.setState({ lastNameDirty: true });
+        break;
+      case "email":
+        this.setState({ emailDirty: true });
+        break;
+      case "phone":
+        this.setState({ phoneDirty: true });
+        break;
+      default:
+        return null;
+    }
   };
 
   openForm = () => {
@@ -95,60 +165,77 @@ export class AddRow extends Component {
       lastName,
       email,
       phone,
-      tipId,
-      tipFirstname,
-      tipLastname,
-      tipEmail,
+      idDirty,
+      firstNameDirty,
+      lastNameDirty,
+      emailDirty,
+      phoneDirty,
+      idError,
+      firstNameError,
+      lastNameError,
+      emailError,
+      phoneError,
     } = this.state;
     return (
       <div
         style={{
           display: "flex",
           justifyContent: isOpen ? "space-between" : "flex-end",
-          height: '80px'
+          height: "80px",
         }}
       >
         {!isOpen ? null : (
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <FormInput
+              name="id"
               inputType="text"
               placeholder="id"
               value={id}
               onChange={this.idHandler}
-              tipTitle="Id должно быть числом"
-              isTipped={tipId}
+              errorTitle={idError}
+              isDirty={idDirty}
+              onBlurHandler={this.onBlurHandler}
             />
             <FormInput
+              name="firstName"
               inputType="text"
               placeholder="First name"
               value={firstName}
               onChange={this.firstNameHandler}
-              tipTitle="Имя должно состоять из букв"
-              isTipped={tipFirstname}
+              errorTitle={firstNameError}
+              isDirty={firstNameDirty}
+              onBlurHandler={this.onBlurHandler}
             />
             <FormInput
+              name="lastName"
               inputType="text"
               placeholder="Last name"
               value={lastName}
               onChange={this.lastNameHandler}
-              tipTitle="Фамилия должна состоять из букв"
-              isTipped={tipLastname}
+              errorTitle={lastNameError}
+              isDirty={lastNameDirty}
+              onBlurHandler={this.onBlurHandler}
             />
             <FormInput
+              name="email"
               inputType="email"
               placeholder="Email"
               value={email}
               onChange={this.emailHandler}
-              tipTitle="index@site.com"
-              isTipped={tipEmail}
+              errorTitle={emailError}
+              isDirty={emailDirty}
+              onBlurHandler={this.onBlurHandler}
             />
             <PhoneInputForm
               mask="(000)000-0000"
               placeholder="Phone"
+              name="phone"
               size={13}
               value={phone}
               onChange={this.phoneHandler}
-              tipTitle="Телефон введен не полностью"
+              onBlurHandler={this.onBlurHandler}
+              errorTitle={phoneError}
+              isDirty={phoneDirty}
             />
           </div>
         )}
