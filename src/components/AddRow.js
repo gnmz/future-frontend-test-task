@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import AddRowButton from "./AddRowButton";
 import FormInput from "./FormInput";
 import PhoneInputForm from "./PhoneInputForm";
 
@@ -157,7 +158,6 @@ export class AddRow extends Component {
     const addNewRow = this.props.addNewRow;
     addNewRow(newRow);
     this.resetInputs();
-    
   };
 
   resetInputs = () => {
@@ -194,7 +194,8 @@ export class AddRow extends Component {
         style={{
           display: "flex",
           justifyContent: isOpen ? "space-between" : "flex-end",
-          height: "80px",
+          margin: '5px 0',
+          height: "80px", 
         }}
       >
         {!isOpen ? null : (
@@ -253,17 +254,16 @@ export class AddRow extends Component {
           </div>
         )}
         {!isOpen ? (
-          <button
-            className="btn btn-primary"
-            style={{ float: "right" }}
+          <AddRowButton
             onClick={this.openForm}
-          >
-            Добавить
-          </button>
+            title="Добавить"
+            isFormOpen={isOpen}
+          />
         ) : (
-          <button
-            className="btn btn-primary"
+          <div style={{display: "flex", flexDirection: 'column', justifyContent: 'space-around'}}>
+          <AddRowButton
             onClick={this.addNewRow}
+            title="Добавить"
             disabled={
               idError ||
               firstNameError ||
@@ -271,9 +271,9 @@ export class AddRow extends Component {
               emailError ||
               phoneError
             }
-          >
-            Записать
-          </button>
+          />
+          <AddRowButton title="Закрыть форму" onClick={()=>{this.setState({isOpen: false})}}/>
+          </div>
         )}
       </div>
     );

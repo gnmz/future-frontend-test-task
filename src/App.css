@@ -113,3 +113,8 @@
 .form-input {
   width: 18%;
 }
+
+.add-row-btn {
+  height: 38px;
+  width: 140px;
+}
