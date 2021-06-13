@@ -1,0 +1,19 @@
+.add-row-form {
+  display: flex;
+  justify-content: flex-end;
+  margin: 5px 0;
+  height: 80px;
+}
+
+.form-open {
+  justify-content: space-between;
+}
+
+.add-row-form-inputs {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-input {
+  width: 18%;
+}

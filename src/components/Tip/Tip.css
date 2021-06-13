@@ -1,0 +1,9 @@
+.tip p {
+  font-size: 10px;
+  color: red;
+  margin: 0;
+  margin-left: 5px;
+}
+.tip {
+  margin: 5px 0 0;
+}

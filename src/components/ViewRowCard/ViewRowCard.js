@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import './ViewRowCard.css'
+
 export class ViewRowCard extends Component {
   state = {
     text: this.props.selectedRow.description,

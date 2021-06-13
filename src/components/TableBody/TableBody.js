@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import './TableBody.css'
+
 export class TableBody extends Component {
     render() {
         const {data, selectingRow} = this.props
@@ -7,6 +9,7 @@ export class TableBody extends Component {
             <tbody>
             {data.map((item) => (
               <tr
+              className="acitve-table-item"
                 key={item.id + Math.random()}
                 onClick={() => {
                   selectingRow(item);

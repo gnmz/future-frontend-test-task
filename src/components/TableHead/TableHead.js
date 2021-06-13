@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import SortableHeader from '../SortableHeader/SortableHeader'
 
+import './TableHead.css'
+
 export class TableHead extends Component {
     render() {
         const {sortFieldHandler,sortField, sort } = this.props;

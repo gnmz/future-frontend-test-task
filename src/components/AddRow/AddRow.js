@@ -3,7 +3,7 @@ import AddRowButton from "../AddRowButton/AddRowButton";
 import FormInput from "../FormInput/FormInput";
 import PhoneInputForm from "../PhoneInputForm/PhoneInputForm";
 
-import './AddRow.css'
+import "./AddRow.css";
 
 export class AddRow extends Component {
   state = {
@@ -251,16 +251,9 @@ export class AddRow extends Component {
       this.state;
 
     return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: isOpen ? "space-between" : "flex-end",
-          margin: "5px 0",
-          height: "80px",
-        }}
-      >
+      <div className={isOpen ? "add-row-form form-open" : "add-row-form"}>
         {!isOpen ? null : (
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div className="add-row-form-inputs">
             <FormInput
               name="id"
               inputType="text"

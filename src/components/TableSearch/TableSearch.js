@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Tip from "../Tip/Tip";
 
+import './TableSearch.css'
+
 export class TableSearch extends Component {
   state = {
     value: "",
