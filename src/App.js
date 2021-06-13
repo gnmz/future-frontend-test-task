@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import ReactPaginate from "react-paginate";
 import "./App.css";
-import ActionModeSelector from "./components/ActionModeSelector";
-import AddRow from "./components/AddRow";
+import ActionModeSelector from "./components/ActionModeSelector/ActionModeSelector";
+import AddRow from "./components/AddRow/AddRow";
 import Loader from "./components/Loader/Loader";
 import Table from "./components/Table/Table";
-import TableSearch from "./components/TableSearch";
-import ViewRowCard from "./components/ViewRowCard";
+import TableSearch from "./components/TableSearch/TableSearch";
+import ViewRowCard from "./components/ViewRowCard/ViewRowCard";
 
 export class App extends Component {
   state = {

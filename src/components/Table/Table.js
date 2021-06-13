@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import TableBody from "../TableBody";
-import TableHead from "../TableHead";
+import TableBody from "../TableBody/TableBody";
+import TableHead from "../TableHead/TableHead";
 
 import './Table.css'
 

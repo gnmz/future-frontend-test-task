@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Tip from "./Tip";
+import Tip from "../Tip/Tip";
 
 export class TableSearch extends Component {
   state = {

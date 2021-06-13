@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import './ActionModeSelector.css'
+
 export class ActionModeSelector extends Component {
   render() {
     const { fetchSmallData, fetchBigData } = this.props;

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import AddRowButton from "./AddRowButton";
-import FormInput from "./FormInput";
-import PhoneInputForm from "./PhoneInputForm";
+import AddRowButton from "../AddRowButton/AddRowButton";
+import FormInput from "../FormInput/FormInput";
+import PhoneInputForm from "../PhoneInputForm/PhoneInputForm";
+
+import './AddRow.css'
 
 export class AddRow extends Component {
   state = {

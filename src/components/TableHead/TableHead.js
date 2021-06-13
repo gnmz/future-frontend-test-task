@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import SortableHeader from './SortableHeader'
+import SortableHeader from '../SortableHeader/SortableHeader'
 
 export class TableHead extends Component {
     render() {

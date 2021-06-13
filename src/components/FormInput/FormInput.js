@@ -1,40 +1,37 @@
 import React, { Component } from "react";
-import MaskInput from "react-maskinput/lib";
-import Tip from "./Tip";
+import Tip from "../Tip/Tip";
 
-export class PhoneInputForm extends Component {
+export class FormInput extends Component {
   render() {
     const {
-      mask,
+      inputType,
       placeholder,
-      size,
       value,
       onChange,
       errorTitle,
+      isDirty,
       name,
       onBlurHandler,
-      isDirty,
     } = this.props;
     return (
       <div className="form-input">
-        <MaskInput
-          name={name}
+        <input
+          type={inputType}
+          placeholder={placeholder}
           className={
-            errorTitle && isDirty
+            isDirty && errorTitle
               ? "form-control border-danger"
               : "form-control"
           }
-          mask={mask}
-          placeholder={placeholder}
-          size={size}
+          name={name}
           value={value}
           onChange={onChange}
           onBlur={onBlurHandler}
         />
-        {errorTitle && isDirty ? <Tip tipTitle={errorTitle} /> : null}
+        {(errorTitle && isDirty) && <Tip tipTitle={errorTitle} /> }
       </div>
     );
   }
 }
 
-export default PhoneInputForm;
+export default FormInput;
