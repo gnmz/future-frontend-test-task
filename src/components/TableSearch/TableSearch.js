@@ -24,11 +24,17 @@ export class TableSearch extends Component {
     }
   };
 
+  onBlurHandler = () => {
+    const onSearch = this.props.onSearch;
+    const value = this.state.value;
+    onSearch(value);
+  }
+
   render() {
     const { value } = this.state;
     const { onSearch } = this.props;
     return (
-      <div>
+      <div className="search-form-wrapper">
       <div className="input-group mb-2 mt-2">
         <input
           className="form-control"
@@ -36,6 +42,7 @@ export class TableSearch extends Component {
           value={value}
           onChange={this.inputHandler}
           onKeyDown={this.onKeyDownHandler}
+          onBlur={this.onBlurHandler}
         />
         <button
         className="btn btn-primary"
@@ -46,7 +53,7 @@ export class TableSearch extends Component {
           Найти
         </button>
       </div>
-      {this.props.searchError && value ? <Tip tipTitle={this.props.searchError} /> : null}
+      {(this.props.searchError ||  value) && <Tip tipTitle={this.props.searchError} /> }
       </div>
     );
   }

@@ -1,7 +1,7 @@
 .add-row-form {
   display: flex;
   justify-content: flex-end;
-  margin: 5px 0;
+  margin: 0 0 5px;
   height: 80px;
 }
 
