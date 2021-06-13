@@ -18,6 +18,7 @@ export class App extends Component {
     selectedRow: null,
     searchbleData: [],
     loadingError: "",
+    searchError: ''
   };
 
   componentDidMount() {}
@@ -82,7 +83,7 @@ export class App extends Component {
   onSearch = (item) => {
     const { data } = this.state;
     if (item === "") {
-      this.setState({ searchbleData: [] });
+      this.setState({ searchbleData: [], searchError: '' });
     } else {
       const searchbleData = data.filter((user) => {
         return (
@@ -92,7 +93,14 @@ export class App extends Component {
           user["phone"].toLowerCase().includes(item.toLowerCase())
         );
       });
-      this.setState({ searchbleData: searchbleData });
+      if(searchbleData.length === 0){
+        this.setState({searchbleData: searchbleData, searchError: 'Пользователя с такими данными нет'})
+        
+      }else
+      {
+        this.setState({ searchbleData: searchbleData, searchError: '' });
+      }
+      
     }
   };
 
@@ -144,7 +152,7 @@ export class App extends Component {
           <div style={{ textAlign: "center" }}>{loadingError}</div>
         ) : (
           <>
-            <TableSearch onSearch={this.onSearch} />
+            <TableSearch onSearch={this.onSearch} searchError={this.state.searchError} />
             <AddRow
               addNewRow={this.addNewRow}
               isAddNewArrow={this.state.isAddNewArrow}

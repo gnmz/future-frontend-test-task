@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Tip from "./Tip";
 
 export class TableSearch extends Component {
   state = {
@@ -25,6 +26,7 @@ export class TableSearch extends Component {
     const { value } = this.state;
     const { onSearch } = this.props;
     return (
+      <div>
       <div className="input-group mb-2 mt-2">
         <input
           className="form-control"
@@ -41,6 +43,8 @@ export class TableSearch extends Component {
         >
           Найти
         </button>
+      </div>
+      {this.props.searchError && value ? <Tip tipTitle={this.props.searchError} /> : null}
       </div>
     );
   }
