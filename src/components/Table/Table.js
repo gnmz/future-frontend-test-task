@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import TableBody from "./TableBody";
-import TableHead from "./TableHead";
+import TableBody from "../TableBody";
+import TableHead from "../TableHead";
+
+import './Table.css'
 
 export class Table extends Component {
   state = {
@@ -81,7 +83,7 @@ export class Table extends Component {
     const { sortField, sort } = this.state;
     return (
       <div className="table-wrapper">
-        <table className="table" style={{ cursor: "pointer" }}>
+        <table className="table">
           <TableHead
             sortField={sortField}
             sort={sort}

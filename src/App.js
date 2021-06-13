@@ -4,7 +4,7 @@ import "./App.css";
 import ActionModeSelector from "./components/ActionModeSelector";
 import AddRow from "./components/AddRow";
 import Loader from "./components/Loader/Loader";
-import Table from "./components/Table";
+import Table from "./components/Table/Table";
 import TableSearch from "./components/TableSearch";
 import ViewRowCard from "./components/ViewRowCard";
 
