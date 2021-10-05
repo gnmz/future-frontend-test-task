@@ -20,7 +20,7 @@ https://github.com/fugr-ru/frontend-javascript-test
 
 Приложение создано с помощью create-react-app
 
-Уставноены доплнительно:
+Установлено доплнительно:
 
 bootstrap - для отображения интерфейса
 
